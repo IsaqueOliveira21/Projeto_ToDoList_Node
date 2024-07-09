@@ -1,0 +1,7 @@
+{
+    "watch": ["src"],
+    "ext": "js,json",
+    "ignore": ["public"],
+    "exec": "webpack && node ./src/app.js"
+  }
+  
