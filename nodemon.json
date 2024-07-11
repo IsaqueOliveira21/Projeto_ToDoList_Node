@@ -1,7 +1,6 @@
 {
-    "watch": ["src"],
-    "ext": "js,json",
-    "ignore": ["public"],
-    "exec": "webpack && node ./src/app.js"
+  "execMap": {
+    "js":"node -r sucrase/register"
   }
+}
   

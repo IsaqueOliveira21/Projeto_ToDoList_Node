@@ -1,21 +1,28 @@
-const express = require('express');
-const { User } = require('./models');
-const path = require('path');
+import {resolve} from 'path';
+import './database';
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+import express from 'express';
+import userRoutes from './routes/user';
 
-app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/index.html'));
-});
 
-app.get('/users', async (req, res) => {
-  const users = await User.findAll();
-  res.json(users);
-});
+class App {
+    constructor() {
+        this.app = express();
+        this.middlewares();
+        this.routes();
+    }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+    middlewares() {
+        this.app.use(express.urlencoded({extended: true}));
+        this.app.use(express.json());
+        this.app.set('views', resolve(__dirname, 'views'));
+        this.app.set('view engine', 'ejs');
+    }
+
+    routes() {
+        this.app.use('/', userRoutes);
+    }
+}
+
+export default new App().app;
