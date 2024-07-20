@@ -4,9 +4,7 @@ import express from 'express';
 import session from 'express-session';
 import flash from 'connect-flash';
 import userRoutes from './routes/user';
-
-
-
+import tarefaRoutes from './routes/tarefa';
 class App {
     constructor() {
         this.app = express();
@@ -17,6 +15,8 @@ class App {
     middlewares() {
         this.app.use(express.urlencoded({extended: true}));
         this.app.use(express.json());
+        this.app.use(express.static(resolve(__dirname, '..', 'public')));
+        
         this.app.set('views', resolve(__dirname, 'views'));
         this.app.set('view engine', 'ejs');
 
@@ -39,6 +39,7 @@ class App {
 
     routes() {
         this.app.use('/', userRoutes);
+        this.app.use('/tarefas', tarefaRoutes);
     }
 }
 

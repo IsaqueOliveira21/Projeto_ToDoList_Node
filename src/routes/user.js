@@ -6,6 +6,7 @@ const router = new Router();
 
 router.get('/', userController.loginForm);
 router.post('/login', userController.login);
+router.get('/logout', loginRequired, userController.logout);
 router.get('/register', userController.create);
 router.post('/store', userController.store);
 router.get('/dashboard', loginRequired, userController.dashboard);

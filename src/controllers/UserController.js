@@ -26,6 +26,14 @@ class UserController {
         return res.redirect('/dashboard');
     }
 
+    async logout(req, res) {
+        req.session.userId = null;
+        req.session.userEmail = null;
+
+        req.flash('success_msg', 'Deslogado com sucesso');
+        return res.redirect('/');
+    }
+
 
     create(req, res) {
         return res.render('register');

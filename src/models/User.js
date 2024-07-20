@@ -53,6 +53,10 @@ export default class User extends Model {
         return this;
     }
 
+    static associate(models) {
+        this.hasMany(models.Tarefa, { foreignKey: 'user_id', as: 'tarefas' });
+    }
+
     passwordValidate(password) {
         return bcrypt.compare(password, this.password_hash);
     }
