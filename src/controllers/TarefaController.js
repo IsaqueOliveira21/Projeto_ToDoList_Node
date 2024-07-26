@@ -1,7 +1,26 @@
 import Tarefa from "../models/Tarefa";
 import { DateTime } from "luxon";
+import User from "../models/User";
+import { Op } from "sequelize";
 
 class TarefaController {
+
+    async index(req, res) {
+        const tarefas = await Tarefa.findAll({
+            where: {
+                user_id: req.session.userId,
+            },
+            include: [
+                {
+                    model: User,
+                    as: 'user',
+                    attributes: ['name', 'email'],
+                }
+            ]
+        });
+        res.render('dashboard/index', { tarefas: tarefas, DateTime });
+    }
+
     create(req, res) {
         return res.render('tarefas/dados');
     }
@@ -24,6 +43,12 @@ class TarefaController {
             req.flash('error_msg', `Error: ${error}`);
             return res.redirect('/dashboard');
         }
+    }
+
+    async edit(req, res) {
+        const { id } = req.params;
+        const tarefa = await Tarefa.findByPk(id);
+        return res.render('tarefas/dados', { tarefa, DateTime });
     }
 }
 

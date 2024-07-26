@@ -23,7 +23,7 @@ class UserController {
         req.session.userId = user.id;
         req.session.userEmail = user.email;
         
-        return res.redirect('/dashboard');
+        return res.redirect('tarefas/dashboard');
     }
 
     async logout(req, res) {
@@ -52,10 +52,6 @@ class UserController {
             req.flash('error_msg', `Error: ${error}`);
             return res.redirect('/');
         }
-    }
-
-    dashboard(req, res) {
-        return res.render('dashboard/index');
     }
 }
 
