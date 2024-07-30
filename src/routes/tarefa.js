@@ -8,5 +8,6 @@ router.get('/create', loginRequired, tarefaController.create);
 router.post('/store', loginRequired, tarefaController.store);
 router.get('/dashboard', loginRequired, tarefaController.index);
 router.get('/editar/:id', loginRequired, tarefaController.edit);
+router.post('/update/:id', loginRequired, tarefaController.update);
 
 export default router;

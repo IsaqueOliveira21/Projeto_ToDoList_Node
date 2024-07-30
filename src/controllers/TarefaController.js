@@ -38,10 +38,10 @@ class TarefaController {
                 data_termino: dataConclusao,
             });
             req.flash('success_msg', `Tarefa criada com sucesso!`);
-            return res.redirect('/dashboard');
+            return res.redirect('/tarefas/dashboard');
         } catch(error) {
             req.flash('error_msg', `Error: ${error}`);
-            return res.redirect('/dashboard');
+            return res.redirect('/tarefas/dashboard');
         }
     }
 
@@ -49,6 +49,22 @@ class TarefaController {
         const { id } = req.params;
         const tarefa = await Tarefa.findByPk(id);
         return res.render('tarefas/dados', { tarefa, DateTime });
+    }
+
+    async update(req, res) {
+        const { id } = req.params;
+        const tarefa = await Tarefa.findByPk(id);
+        let dataConclusao = null;
+        if(req.body.prazo == 'on') {
+            dataConclusao = DateTime.fromFormat(req.body.data_conclusao, 'yyyy-MM-dd').toFormat('yyyy-MM-dd 23:59:59');
+        }
+        const tarefaAtualizada = tarefa.update({
+            titulo: req.body.titulo,
+            descricao: req.body.descricao,
+            data_termino: dataConclusao, 
+        });
+        req.flash('success_msg', `Tarefa atualizada com sucesso!`);
+        return res.redirect('/tarefas/dashboard');
     }
 }
 
