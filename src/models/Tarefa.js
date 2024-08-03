@@ -17,6 +17,10 @@ export default class Tarefa extends Model {
             data_termino: {
                 type: Sequelize.DATE,
                 defaultValue: ''
+            },
+            concluida: {
+                type: Sequelize.TINYINT,
+                defaultValue: 0
             }
         }, {
             sequelize

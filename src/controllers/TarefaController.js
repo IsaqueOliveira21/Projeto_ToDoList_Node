@@ -66,6 +66,24 @@ class TarefaController {
         req.flash('success_msg', `Tarefa atualizada com sucesso!`);
         return res.redirect('/tarefas/dashboard');
     }
+
+    async concluirTarefa(req, res) {
+        const { id } = req.params;
+        const tarefa = await Tarefa.findByPk(id);
+        const tarefaStatus = tarefa.concluida;
+        const tarefaConcluida = tarefa.update({
+           concluida: tarefaStatus == 0 ? 1 : 0
+        });
+        return res.json(tarefaConcluida);
+    }
+
+    async delete(req, res) {
+        const { id } = req.params;
+        const tarefa = await Tarefa.findByPk(id);
+        await tarefa.destroy();
+        req.flash('success_msg', `Tarefa excluida com sucesso!`);
+        return res.redirect('/tarefas/dashboard');
+    }
 }
 
 export default new TarefaController();

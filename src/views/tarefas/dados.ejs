@@ -18,7 +18,7 @@
                       <input class="form-check-input" type="checkbox" role="switch" id="prazo" name="prazo" <%= typeof(tarefa) != 'undefined' && tarefa.data_termino !== null ? 'checked' : '' %>>
                       <label class="form-check-label" for="prazo">Definir data limite de conclusão</label>
                     </div>
-                    <div class="mb-3" id="divPrazo">
+                    <div class="mb-3 <%= typeof(tarefa) != 'undefined' && tarefa.data_termino !== null ? '' : 'd-none' %>" id="divPrazo">
                       <label for="data_conclusao" class="form-label">Data Conlusão</label>
                       <input type="date" class="form-control" name="data_conclusao" id="data_conclusao" value="<%= typeof(tarefa) != 'undefined' && tarefa.data_termino !== null ? DateTime.fromJSDate(tarefa.data_termino).toFormat('yyyy-MM-dd') : '' %>">
                     </div>

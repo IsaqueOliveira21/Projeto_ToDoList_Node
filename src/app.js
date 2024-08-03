@@ -5,6 +5,7 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import userRoutes from './routes/user';
 import tarefaRoutes from './routes/tarefa';
+import rankingRoutes from './routes/ranking';
 class App {
     constructor() {
         this.app = express();
@@ -40,6 +41,7 @@ class App {
     routes() {
         this.app.use('/', userRoutes);
         this.app.use('/tarefas', tarefaRoutes);
+        this.app.use('/ranking', rankingRoutes);
     }
 }
 

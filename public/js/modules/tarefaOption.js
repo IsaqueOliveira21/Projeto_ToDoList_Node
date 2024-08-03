@@ -3,8 +3,8 @@ const divPrazo = document.getElementById('divPrazo');
 
 switchPrazo.addEventListener('change', function(e) {
     if(switchPrazo.checked) {
-        divPrazo.style.display = 'block';
+        divPrazo.classList.remove('d-none');
     } else {
-        divPrazo.style.display = 'none';
+        divPrazo.classList.add('d-none');
     }
 });

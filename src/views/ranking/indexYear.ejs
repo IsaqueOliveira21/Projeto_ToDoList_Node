@@ -1,0 +1,21 @@
+<%- include('../templates/head') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1 class="titulo">Ranking anual - <%= anoAtual %> </h1>
+        </div>
+        <div class="card-body">
+          <% tarefasUsuarios.forEach(tarefa => { %>
+            <p><%= tarefa.user.name + ' - ' +  tarefa.dataValues.tarefasAno %></p>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../templates/footer') %>
