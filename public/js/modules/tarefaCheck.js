@@ -10,7 +10,7 @@ tarefas.forEach(tarefa => {
 
 
 function concluirTarefa(id) {
-    console.log(id);
+    //console.log(id);
     axios.get(`/tarefas/concluir/tarefa/${id}`)
     .then(response => {
         window.location.href = '/tarefas/dashboard';

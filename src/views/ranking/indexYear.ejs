@@ -9,9 +9,26 @@
           <h1 class="titulo">Ranking anual - <%= anoAtual %> </h1>
         </div>
         <div class="card-body">
-          <% tarefasUsuarios.forEach(tarefa => { %>
-            <p><%= tarefa.user.name + ' - ' +  tarefa.dataValues.tarefasAno %></p>
-          <% }); %>
+          <div class="table-responsive text-center">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">🏆</th>
+                  <th class="text-left">Nome</th>
+                  <th class="text-center">Tarefas Realizadas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% tarefasUsuarios.forEach((tarefa, k) => { %>
+                  <tr>
+                    <td><%= k+1 %>º</td>
+                    <td><%= tarefa.user.name %></td>
+                    <td><%= tarefa.dataValues.tarefasAno %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

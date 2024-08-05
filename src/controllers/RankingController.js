@@ -17,7 +17,8 @@ class RankingController {
             where: {
                 created_at: {
                     [Op.between]: [inicioMes, fimMes]
-                }
+                },
+                concluida: 1
             },
             include: [
                 {
@@ -45,7 +46,8 @@ class RankingController {
             where: {
                 created_at: {
                     [Op.between]: [inicioAno, fimAno]
-                }
+                },
+                concluida: 1
             },
             include: {
                 model: User,
@@ -64,6 +66,9 @@ class RankingController {
                 'user_id',
                 [sequelize.fn('COUNT', sequelize.col('Tarefa.id')), 'tarefasGlobais']
             ],
+            where: {
+                concluida: 1
+            },
             include: {
                 model: User,
                 as: 'user',

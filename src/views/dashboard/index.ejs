@@ -8,31 +8,12 @@
                 <div class="card-header text-center">
                     <h1 class="titulo">Suas Tarefas</h1>
                 </div>
-                <div class="card-body">
-                    <% tarefas.forEach(tarefa => { %>
-                        <div class="form-check">
-                            <input class="form-check-input check-tarefa" type="checkbox" value="<%= tarefa.id %>" id="flexCheckDefault<%= tarefa.id %>" <%= tarefa.concluida == 1 ? 'checked' : '' %>>
-                            <label class="form-check-label" for="flexCheckDefault">
-                              <%= tarefa.titulo %>
-                            </label>
-                            &nbsp;
-                            <% if(tarefa.data_termino !== null) { %>
-                                <% if(DateTime.fromJSDate(tarefa.data_termino) >= DateTime.now()) { %>
-                                    <span class="badge text-bg-primary"><%= DateTime.fromJSDate(tarefa.data_termino).toFormat('dd/MM/yyyy') %></span>
-                                <% } else { %>
-                                    <span class="badge text-bg-danger"><%= DateTime.fromJSDate(tarefa.data_termino).toFormat('dd/MM/yyyy') %> - Atrasado</span>
-                                <% } %>
-                            <% } %>
-                            <% if(tarefa.concluida == 1) { %>
-                                <span class="badge text-bg-success">Concluida</span>
-                            <% } else { %>
-                                <span class="badge text-bg-secondary">Pendente</span>
-                            <% } %>
-                            <a href="/tarefas/editar/<%= tarefa.id %>" class="btn btn-secondary" role="button">Editar</a>
-                            <a href="/tarefas/delete/<%= tarefa.id %>" class="btn btn-danger" role="button">Excluir</a>
-                        </div>
-                    <% }); %>
-                </div>
+                <% tarefas.forEach((tarefa, k)=> { %>
+                    <div class="card-body text-md-center form-inline">
+                        <input type="checkbox" class="form-check-input check-tarefa" id="flexCheckDefault<%= tarefa.id %>" style="width: 25px; height: 25px;" <%= tarefa.concluida == 1 ? 'checked' : '' %> value="<%= tarefa.id %>">
+                        <a href="#" class="fs-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover tarefa-modal <%= DateTime.fromJSDate(tarefa.data_termino) < DateTime.now() && tarefa.concluida != 1 ? 'text-danger' : '' %>" data-id="<%= tarefa.id %>" data-titulo="<%= tarefa.titulo %>" data-descricao="<%= tarefa.descricao %>" data-prazo="<%= tarefa.data_termino %>" data-status="<%= tarefa.concluida %>"><%= tarefa.titulo %></a>
+                    </div>
+                <% }); %>
             </div>
         </div>
         <div class="col-1"></div>
